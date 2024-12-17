@@ -1,5 +1,4 @@
 use crate::{
-    bundle::FoodBoundle,
     common::{rand_pos, BLOCK_SIZE, WINDOW_BORDER_END, WINDOW_BORDER_START},
     component::{body::SnakeComp, food::FoodComp},
     resources::{CountdownRes, CountdownState, FoodCreateInterval},
@@ -63,6 +62,6 @@ fn food_create(
         [WINDOW_BORDER_START.y as i32, WINDOW_BORDER_END.y as i32],
         pos_list,
     );
-    cmd.spawn(FoodBoundle::new(pos * BLOCK_SIZE));
+    cmd.spawn(FoodComp::new(pos * BLOCK_SIZE));
     state.set(FoodState::Waiting);
 }

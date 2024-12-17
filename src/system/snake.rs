@@ -1,10 +1,9 @@
 use bevy::prelude::*;
 
 use crate::{
-    bundle::snake::SnakeBodyBundle,
     common::BLOCK_SIZE,
     component::{
-        body::{BodyComp, HeadComp},
+        body::{BodyComp, HeadComp, SnakeComp},
         food::FoodComp,
         MoveComp,
     },
@@ -30,11 +29,8 @@ fn snake_init(
     mut tail_pos: ResMut<TailPosRes>,
 ) {
     command.spawn(Camera2d);
-    let head = SnakeBodyBundle::new_head();
-    tail_pos.set(
-        head.0.transform.translation.truncate(),
-        head.0.move_comp.clone(),
-    );
+    let head = SnakeComp::new_head();
+    tail_pos.set(Vec2::default(), MoveComp::default());
 
     let id = command.spawn(head).id();
     seg.items.push(id);
@@ -122,7 +118,7 @@ fn eat_food(
         return;
     }
     let entity = cmd
-        .spawn(SnakeBodyBundle::new_body(
+        .spawn(SnakeComp::new_body(
             tail_pos.pos,
             tail_pos.move_comp.clone(),
         ))

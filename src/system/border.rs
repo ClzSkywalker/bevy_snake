@@ -1,8 +1,8 @@
 use bevy::prelude::*;
 
 use crate::{
-    bundle::BorderBundle,
     common::{BLOCK_SIZE, WINDOW_BORDER_END, WINDOW_BORDER_START},
+    component::border::BorderComp,
 };
 
 pub struct BorderPlugin;
@@ -21,11 +21,11 @@ fn border_init(mut command: Commands) {
 
     // 区间：左闭右开，所以需要+1
     for pos in start.x as i32..end.x as i32 + 1 {
-        command.spawn(BorderBundle::new(Vec2::new(
+        command.spawn(BorderComp::new(Vec2::new(
             pos as f32 * border.x,
             start.y * border.y,
         )));
-        command.spawn(BorderBundle::new(Vec2::new(
+        command.spawn(BorderComp::new(Vec2::new(
             pos as f32 * border.x,
             end.y * border.y,
         )));
@@ -33,11 +33,11 @@ fn border_init(mut command: Commands) {
 
     // 上下边缘已渲染，所以从start.y+BLOCK_SIZE.y开始
     for pos in start.y as i32 + 1..end.y as i32 {
-        command.spawn(BorderBundle::new(Vec2::new(
+        command.spawn(BorderComp::new(Vec2::new(
             start.x * border.x,
             pos as f32 * border.y,
         )));
-        command.spawn(BorderBundle::new(Vec2::new(
+        command.spawn(BorderComp::new(Vec2::new(
             end.x * border.x,
             pos as f32 * border.y,
         )));

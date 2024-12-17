@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{bundle::CounterBundle, component::CounterComp};
+use crate::component::counter::CounterComp;
 
 pub struct CounterPlugin;
 
@@ -38,7 +38,7 @@ impl CounterRes {
 }
 
 fn count_init(mut cmd: Commands, count: Res<CounterRes>) {
-    cmd.spawn(CounterBundle::new(count.get().to_string()));
+    cmd.spawn(CounterComp::new(count.get().to_string()));
 }
 
 fn counter_update(

@@ -3,6 +3,7 @@ use bevy::{math::Vec2, prelude::Component};
 use crate::resources::ControlNextKeyRes;
 
 pub mod body;
+pub mod border;
 pub mod counter;
 pub mod food;
 
@@ -51,6 +52,3 @@ impl MoveComp {
         }
     }
 }
-
-#[derive(Debug, Default, Clone, Component)]
-pub struct CounterComp;
